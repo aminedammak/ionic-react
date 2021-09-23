@@ -9,7 +9,11 @@ const InputControls: React.FC<{
     props.onSelectValue(event.detail.value);
   };
   return (
-    <IonSegment value={props.selectedValue} onIonChange={inputChangeHandler}>
+    <IonSegment
+      mode="ios"
+      value={props.selectedValue}
+      onIonChange={inputChangeHandler}
+    >
       <IonSegmentButton value="mkg">
         <IonLabel>M/KG</IonLabel>
       </IonSegmentButton>

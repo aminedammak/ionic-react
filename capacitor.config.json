@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "ionic-react",
-	"webDir": "build",
-	"bundledWebRuntime": false
+  "appId": "com.aminedammak.first-ionic-app",
+  "appName": "WH calculator",
+  "webDir": "build",
+  "bundledWebRuntime": false
 }
