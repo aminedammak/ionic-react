@@ -5,15 +5,19 @@ import { calculatorOutline, refreshOutline } from "ionicons/icons";
 const BmiControls: React.FC<{ onCalculate: () => void; onReset: () => void }> =
   (props) => {
     return (
-      <IonRow>
-        <IonCol className="ion-text-left">
-          <IonButton onClick={props.onCalculate}>
+      <IonRow className="ion-margin-top">
+        <IonCol size="12" size-md="6" className="ion-text-center">
+          <IonButton
+            onClick={props.onCalculate}
+            expand="block"
+            color="secondary"
+          >
             <IonIcon slot="start" icon={calculatorOutline} />
             Calculate
           </IonButton>
         </IonCol>
-        <IonCol className="ion-text-right">
-          <IonButton onClick={props.onReset}>
+        <IonCol size="12" size-md="6" className="ion-text-center">
+          <IonButton onClick={props.onReset} fill="clear" color="medium">
             <IonIcon slot="start" icon={refreshOutline} />
             Reset
           </IonButton>
