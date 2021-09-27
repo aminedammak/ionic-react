@@ -11,6 +11,9 @@ import {
   IonCol,
   IonCardContent,
   IonCard,
+  IonButtons,
+  IonMenu,
+  IonMenuButton,
 } from "@ionic/react";
 // import { useHistory } from 'react-router-dom';
 
@@ -31,6 +34,9 @@ const Courses: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
           <IonTitle>Courses</IonTitle>
         </IonToolbar>
       </IonHeader>
