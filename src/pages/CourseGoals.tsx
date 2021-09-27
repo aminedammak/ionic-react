@@ -7,7 +7,16 @@ import {
   IonPage,
   IonButtons,
   IonBackButton,
+  IonItem,
+  IonList,
+  IonButton,
+  IonIcon,
+  IonItemSliding,
+  IonItemOptions,
+  IonItemOption,
 } from "@ionic/react";
+
+import { create, trash } from "ionicons/icons";
 
 import { useParams } from "react-router-dom";
 
@@ -20,6 +29,13 @@ const CourseGoals: React.FC = () => {
     (course) => course.id === selectedCourseId
   );
 
+  const deleteGoalHandler = () => {
+    console.log("deleted");
+  };
+  const editGoalHandler = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    console.log("edited");
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -33,7 +49,27 @@ const CourseGoals: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <h2>This works - course goals page!</h2>
+        {selectedCourse && (
+          <IonList>
+            {selectedCourse.goals.map((goal) => (
+              <IonItemSliding key={goal.id}>
+                <IonItemOptions side="start">
+                  <IonItemOption onClick={deleteGoalHandler} color="danger">
+                    <IonIcon icon={trash} slot="icon-only" />
+                  </IonItemOption>
+                </IonItemOptions>
+                <IonItem lines="full" button>
+                  {goal.text}
+                </IonItem>
+                <IonItemOptions side="end">
+                  <IonItemOption onClick={editGoalHandler}>
+                    <IonIcon icon={create} slot="icon-only" />
+                  </IonItemOption>
+                </IonItemOptions>
+              </IonItemSliding>
+            ))}
+          </IonList>
+        )}
       </IonContent>
     </IonPage>
   );
