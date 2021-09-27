@@ -18,6 +18,7 @@ import {
   IonFabButton,
   IonAlert,
   IonToast,
+  IonModal,
 } from "@ionic/react";
 
 import { addOutline, create, trash } from "ionicons/icons";
@@ -31,6 +32,7 @@ const CourseGoals: React.FC = () => {
   const selectedCourseId = useParams<{ courseId: string }>().courseId;
   const [startedDeleting, setStartedDeleting] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
   const selectedCourse = COURSE_DATA.find(
     (course) => course.id === selectedCourseId
   );
@@ -44,14 +46,28 @@ const CourseGoals: React.FC = () => {
   };
   const startEditGoalHandler = (e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log("edited");
+    setIsEditing(true);
   };
-
+  const cancelEditing = () => {
+    setIsEditing(false);
+  };
   const startAddGoalHandler = () => {
-    console.log("added");
+    setIsEditing(true);
   };
   return (
     <React.Fragment>
+      <IonModal isOpen={isEditing}>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Edit a goal</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <p>Editing ....</p>
+          <IonButton onClick={cancelEditing}>Cancel</IonButton>
+          <IonButton>Save</IonButton>
+        </IonContent>
+      </IonModal>
       <IonToast
         isOpen={!!toastMessage}
         message={toastMessage}
