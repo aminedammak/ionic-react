@@ -16,7 +16,7 @@ import {
   IonItemOption,
 } from "@ionic/react";
 
-import { create, trash } from "ionicons/icons";
+import { addOutline, create, trash } from "ionicons/icons";
 
 import { useParams } from "react-router-dom";
 
@@ -36,16 +36,25 @@ const CourseGoals: React.FC = () => {
     e.stopPropagation();
     console.log("edited");
   };
+
+  const addGoalHandler = () => {
+    console.log("added");
+  };
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
+            <IonBackButton defaultHref="/courses/list" />
           </IonButtons>
           <IonTitle>
             {selectedCourse ? selectedCourse.title : "Course does not exist"}
           </IonTitle>
+          <IonButtons slot="end">
+            <IonButton onClick={addGoalHandler}>
+              <IonIcon slot="icon-only" icon={addOutline} />
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent>
