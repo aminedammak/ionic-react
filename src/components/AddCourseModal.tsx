@@ -12,18 +12,18 @@ import {
   IonItem,
   IonLabel,
   IonInput,
+  IonDatetime,
 } from "@ionic/react";
 
-const EditModal: React.FC<{
+const AddCourseModal: React.FC<{
   show: boolean;
   onCancel: () => void;
-  editedGoal: { id: string; text: string } | null;
 }> = (props) => {
   return (
     <IonModal isOpen={props.show}>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>{props.editedGoal ? "Edit" : "Add"} a goal</IonTitle>
+          <IonTitle>Add a course</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -32,7 +32,15 @@ const EditModal: React.FC<{
             <IonCol>
               <IonItem>
                 <IonLabel position="floating">Title</IonLabel>
-                <IonInput type="text" value={props.editedGoal?.text} />
+                <IonInput type="text" />
+              </IonItem>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonItem>
+                <IonLabel position="floating">Enrollment Date</IonLabel>
+                <IonDatetime displayFormat="MM DD YY" />
               </IonItem>
             </IonCol>
           </IonRow>
@@ -54,4 +62,4 @@ const EditModal: React.FC<{
   );
 };
 
-export default EditModal;
+export default AddCourseModal;
