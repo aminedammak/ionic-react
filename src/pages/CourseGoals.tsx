@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   IonHeader,
   IonToolbar,
@@ -42,6 +42,7 @@ const CourseGoals: React.FC = () => {
     (course) => course.id === selectedCourseId
   );
 
+  const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null);
   const startDeleteGoalHandler = () => {
     setStartedDeleting(true);
   };
@@ -56,6 +57,7 @@ const CourseGoals: React.FC = () => {
     e.stopPropagation();
     setIsEditing(true);
     setSelectedGoal(goal);
+    slidingOptionsRef.current?.closeOpened();
   };
   const cancelEditGoalHandler = () => {
     setIsEditing(false);
@@ -120,7 +122,7 @@ const CourseGoals: React.FC = () => {
           {selectedCourse && (
             <IonList>
               {selectedCourse.goals.map((goal) => (
-                <IonItemSliding key={goal.id}>
+                <IonItemSliding key={goal.id} ref={slidingOptionsRef}>
                   <IonItemOptions side="start">
                     <IonItemOption
                       onClick={startDeleteGoalHandler}
