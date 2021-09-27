@@ -35,6 +35,7 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import "./theme/theme.css";
 
 const App: React.FC = () => (
   <IonApp>
@@ -44,7 +45,7 @@ const App: React.FC = () => (
           <Route path="/courses" exact>
             <Courses />
           </Route>
-          <Route path="/course-goals">
+          <Route path="/courses/:courseId">
             <CourseGoals />
           </Route>
           <Route path="/all-goals">
