@@ -27,12 +27,17 @@ import { useParams } from "react-router-dom";
 
 import { COURSE_DATA } from "./Courses";
 import { isPlatform } from "@ionic/core";
+import EditModal from "../components/EditModal";
 
 const CourseGoals: React.FC = () => {
   const selectedCourseId = useParams<{ courseId: string }>().courseId;
   const [startedDeleting, setStartedDeleting] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [selectedGoal, setSelectedGoal] = useState<{
+    id: string;
+    text: string;
+  } | null>(null);
   const selectedCourse = COURSE_DATA.find(
     (course) => course.id === selectedCourseId
   );
@@ -44,30 +49,29 @@ const CourseGoals: React.FC = () => {
     setStartedDeleting(false);
     setToastMessage("Goal deleted!");
   };
-  const startEditGoalHandler = (e: React.MouseEvent) => {
+  const startEditGoalHandler = (
+    e: React.MouseEvent,
+    goal: { id: string; text: string }
+  ) => {
     e.stopPropagation();
     setIsEditing(true);
+    setSelectedGoal(goal);
   };
-  const cancelEditing = () => {
+  const cancelEditGoalHandler = () => {
     setIsEditing(false);
+    setSelectedGoal(null);
   };
   const startAddGoalHandler = () => {
     setIsEditing(true);
+    setSelectedGoal(null);
   };
   return (
     <React.Fragment>
-      <IonModal isOpen={isEditing}>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Edit a goal</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent>
-          <p>Editing ....</p>
-          <IonButton onClick={cancelEditing}>Cancel</IonButton>
-          <IonButton>Save</IonButton>
-        </IonContent>
-      </IonModal>
+      <EditModal
+        show={isEditing}
+        onCancel={cancelEditGoalHandler}
+        editedGoal={selectedGoal}
+      />
       <IonToast
         isOpen={!!toastMessage}
         message={toastMessage}
@@ -129,7 +133,9 @@ const CourseGoals: React.FC = () => {
                     {goal.text}
                   </IonItem>
                   <IonItemOptions side="end">
-                    <IonItemOption onClick={startEditGoalHandler}>
+                    <IonItemOption
+                      onClick={(e) => startEditGoalHandler(e, goal)}
+                    >
                       <IonIcon icon={create} slot="icon-only" />
                     </IonItemOption>
                   </IonItemOptions>
