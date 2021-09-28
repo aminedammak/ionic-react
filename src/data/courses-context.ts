@@ -15,8 +15,8 @@ interface Context {
   courses: Course[];
   addCourse: (title: string, enrolled: Date) => void;
   addGoal: (text: string, courseId: string) => void;
-  deleteGoal: () => void;
-  updateGoal: () => void;
+  deleteGoal: (courseId: string, goalId: string) => void;
+  updateGoal: (courseId: string, goalId: string, text: string) => void;
 }
 
 const CoursesContext = React.createContext<Context>({

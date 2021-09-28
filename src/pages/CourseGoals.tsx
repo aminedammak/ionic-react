@@ -41,11 +41,15 @@ const CourseGoals: React.FC = () => {
   );
 
   const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null);
-  const startDeleteGoalHandler = () => {
+  const goalToDeleteRef = useRef<string | null>(null);
+
+  const startDeleteGoalHandler = (goalId: string) => {
+    goalToDeleteRef.current = goalId;
     setStartedDeleting(true);
   };
   const deleteGoalHandler = () => {
     setStartedDeleting(false);
+    coursesCtx.deleteGoal(selectedCourseId, goalToDeleteRef.current!);
     setToastMessage("Goal deleted!");
   };
   const startEditGoalHandler = (
@@ -130,7 +134,7 @@ const CourseGoals: React.FC = () => {
                 <EditableGoalItem
                   key={goal.id}
                   slidingRef={slidingOptionsRef}
-                  onDeleteGoal={startDeleteGoalHandler}
+                  onDeleteGoal={() => startDeleteGoalHandler(goal.id)}
                   text={goal.text}
                   onStartEditGoal={(e: React.MouseEvent) =>
                     startEditGoalHandler(e, goal)
