@@ -6,10 +6,18 @@ import {
   IonToolbar,
   IonButtons,
   IonMenuButton,
+  IonLabel,
+  IonItem,
+  IonToggle,
 } from "@ionic/react";
 import React from "react";
 
+import { COURSE_DATA } from "./Courses";
+
 const Filter: React.FC = () => {
+  const courseFilterChangeHandler = (e: CustomEvent) => {
+    console.log("event", e);
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -21,7 +29,15 @@ const Filter: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <h2>Filter Page</h2>
+        {COURSE_DATA.map((course) => (
+          <IonItem key={course.id}>
+            <IonLabel>{course.title}</IonLabel>
+            <IonToggle
+              value={course.id}
+              onIonChange={courseFilterChangeHandler}
+            ></IonToggle>
+          </IonItem>
+        ))}
       </IonContent>
     </IonPage>
   );

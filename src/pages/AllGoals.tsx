@@ -28,7 +28,7 @@ const AllGoals: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
+            <IonBackButton defaultHref="/courses/list" />
           </IonButtons>
           <IonTitle>All Goals</IonTitle>
         </IonToolbar>
