@@ -16,8 +16,6 @@ import {
 import { Route, Redirect } from "react-router-dom";
 import { IonReactRouter } from "@ionic/react-router";
 
-import { list, options } from "ionicons/icons";
-
 import Filter from "./pages/Filter";
 
 /* Core CSS required for Ionic components to work properly */
@@ -41,37 +39,12 @@ import "./theme/variables.css";
 import "./theme/theme.css";
 import Courses from "./pages/Courses";
 import CourseTabs from "./pages/CourseTabs";
+import { SideDrawer } from "./components/SideDrawer";
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonMenu contentId="main">
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Course Goals</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent>
-          <IonList>
-            <IonMenuToggle>
-              <IonItem
-                button
-                routerLink="/courses/all-goals"
-                routerDirection="none"
-              >
-                <IonIcon slot="start" icon={list} />
-                <IonLabel>All Goals</IonLabel>
-              </IonItem>
-            </IonMenuToggle>
-            <IonMenuToggle>
-              <IonItem button routerLink="/filter" routerDirection="none">
-                <IonIcon slot="start" icon={options} />
-                <IonLabel>Filter</IonLabel>
-              </IonItem>
-            </IonMenuToggle>
-          </IonList>
-        </IonContent>
-      </IonMenu>
+      <SideDrawer />
       <IonRouterOutlet id="main">
         <Route path="/filter" exact>
           <Filter />

@@ -7,18 +7,13 @@ import {
   IonPage,
   IonButtons,
   IonBackButton,
-  IonItem,
   IonList,
   IonButton,
   IonIcon,
-  IonItemSliding,
-  IonItemOptions,
-  IonItemOption,
   IonFab,
   IonFabButton,
   IonAlert,
   IonToast,
-  IonModal,
 } from "@ionic/react";
 
 import { addOutline, create, trash } from "ionicons/icons";
