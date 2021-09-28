@@ -40,20 +40,23 @@ import "./theme/theme.css";
 import Courses from "./pages/Courses";
 import CourseTabs from "./pages/CourseTabs";
 import { SideDrawer } from "./components/SideDrawer";
+import CoursesContextProvider from "./data/CoursesContextProvider";
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <SideDrawer />
-      <IonRouterOutlet id="main">
-        <Route path="/filter" exact>
-          <Filter />
-        </Route>
-        <Route path="/courses">
-          <CourseTabs />
-        </Route>
-        <Redirect path="/" to="/courses/list" exact />
-      </IonRouterOutlet>
+      <CoursesContextProvider>
+        <IonRouterOutlet id="main">
+          <Route path="/filter" exact>
+            <Filter />
+          </Route>
+          <Route path="/courses">
+            <CourseTabs />
+          </Route>
+          <Redirect path="/" to="/courses/list" exact />
+        </IonRouterOutlet>
+      </CoursesContextProvider>
     </IonReactRouter>
   </IonApp>
 );
