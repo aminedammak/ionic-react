@@ -6,15 +6,15 @@ export interface Course {
   enrolled: Date;
   goals: Goal[];
 }
-interface Goal {
+export interface Goal {
   id: string;
   text: string;
 }
 
 interface Context {
   courses: Course[];
-  addCourse: () => void;
-  addGoal: () => void;
+  addCourse: (title: string, enrolled: Date) => void;
+  addGoal: (text: string, courseId: string) => void;
   deleteGoal: () => void;
   updateGoal: () => void;
 }

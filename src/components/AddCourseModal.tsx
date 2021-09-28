@@ -19,25 +19,25 @@ import {
 const AddCourseModal: React.FC<{
   show: boolean;
   onCancel: () => void;
-  onSave: (title: string, enrollement: Date) => void;
+  onSave: (title: string, enrolled: Date) => void;
 }> = (props) => {
   const titleRef = useRef<HTMLIonInputElement>(null);
   const enrollmentRef = useRef<HTMLIonDatetimeElement>(null);
   const [error, setError] = useState<string>("");
   const saveHandler = () => {
     const title = titleRef.current!.value;
-    const enrollement = enrollmentRef.current!.value;
+    const enrolled = enrollmentRef.current!.value;
     if (
       !title ||
-      !enrollement ||
+      !enrolled ||
       title.toString().trim().length === 0 ||
-      enrollement.trim().length === 0
+      enrolled.trim().length === 0
     ) {
-      setError("Title or enrollement fields are invalid");
+      setError("Title or enrolled fields are invalid");
       return;
     } else {
       setError("");
-      props.onSave(title.toString(), new Date(enrollement));
+      props.onSave(title.toString(), new Date(enrolled));
     }
   };
   return (
