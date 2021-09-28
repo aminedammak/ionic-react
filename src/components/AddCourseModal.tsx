@@ -19,6 +19,7 @@ import {
 const AddCourseModal: React.FC<{
   show: boolean;
   onCancel: () => void;
+  onSave: (title: string, enrollement: Date) => void;
 }> = (props) => {
   const titleRef = useRef<HTMLIonInputElement>(null);
   const enrollmentRef = useRef<HTMLIonDatetimeElement>(null);
@@ -36,6 +37,7 @@ const AddCourseModal: React.FC<{
       return;
     } else {
       setError("");
+      props.onSave(title.toString(), new Date(enrollement));
     }
   };
   return (
@@ -63,13 +65,15 @@ const AddCourseModal: React.FC<{
               </IonItem>
             </IonCol>
           </IonRow>
-          <IonRow className="text-align-center">
-            <IonCol>
-              <IonText color="danger">
-                <p>{error}</p>
-              </IonText>
-            </IonCol>
-          </IonRow>
+          {error && (
+            <IonRow className="ion-text-center">
+              <IonCol>
+                <IonText color="danger">
+                  <p>{error}</p>
+                </IonText>
+              </IonCol>
+            </IonRow>
+          )}
 
           <IonRow className="ion-text-center">
             <IonCol>
