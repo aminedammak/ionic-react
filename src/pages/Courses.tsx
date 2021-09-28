@@ -9,18 +9,11 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonCardContent,
-  IonCard,
   IonButtons,
-  IonMenu,
   IonMenuButton,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
   IonFab,
   IonFabButton,
   IonIcon,
-  IonModal,
 } from "@ionic/react";
 // import { useHistory } from 'react-router-dom';
 
@@ -61,12 +54,6 @@ export const COURSE_DATA = [
 ];
 
 const Courses: React.FC = () => {
-  // const history = useHistory();
-
-  // const changePageHandler = () => {
-  //   history.push('/course-goals');
-  // };
-
   const startAddCourseHandler = () => {
     setIsAdding(true);
   };
