@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, MouseEvent } from "react";
 import {
   IonHeader,
   IonToolbar,
@@ -28,6 +28,7 @@ import { useParams } from "react-router-dom";
 import { COURSE_DATA } from "./Courses";
 import { isPlatform } from "@ionic/core";
 import EditModal from "../components/EditModal";
+import EditableGoalItem from "../components/EditableGoalItem";
 
 const CourseGoals: React.FC = () => {
   const selectedCourseId = useParams<{ courseId: string }>().courseId;
@@ -122,26 +123,15 @@ const CourseGoals: React.FC = () => {
           {selectedCourse && (
             <IonList>
               {selectedCourse.goals.map((goal) => (
-                <IonItemSliding key={goal.id} ref={slidingOptionsRef}>
-                  <IonItemOptions side="start">
-                    <IonItemOption
-                      onClick={startDeleteGoalHandler}
-                      color="danger"
-                    >
-                      <IonIcon icon={trash} slot="icon-only" />
-                    </IonItemOption>
-                  </IonItemOptions>
-                  <IonItem lines="full" button>
-                    {goal.text}
-                  </IonItem>
-                  <IonItemOptions side="end">
-                    <IonItemOption
-                      onClick={(e) => startEditGoalHandler(e, goal)}
-                    >
-                      <IonIcon icon={create} slot="icon-only" />
-                    </IonItemOption>
-                  </IonItemOptions>
-                </IonItemSliding>
+                <EditableGoalItem
+                  key={goal.id}
+                  slidingRef={slidingOptionsRef}
+                  onDeleteGoal={startDeleteGoalHandler}
+                  text={goal.text}
+                  onStartEditGoal={(e: React.MouseEvent) =>
+                    startEditGoalHandler(e, goal)
+                  }
+                />
               ))}
             </IonList>
           )}
