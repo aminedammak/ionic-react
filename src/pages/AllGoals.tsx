@@ -12,20 +12,23 @@ import {
   IonLabel,
 } from "@ionic/react";
 
-import CoursesContext from "../data/courses-context";
+import CoursesContext, { Goal } from "../data/courses-context";
 
 const AllGoals: React.FC = () => {
   const coursesCtx = useContext(CoursesContext);
-  const goals = coursesCtx.courses
-    .map((course) => {
-      return course.goals.map((goal) => {
-        return { ...goal, courseTitle: course.title };
+  const courses = coursesCtx.courses.filter((cr) => cr.included);
+  let goals: any[] = [];
+  if (courses.length > 0) {
+    goals = courses
+      .map((course) => {
+        return course.goals.map((goal) => {
+          return { ...goal, courseTitle: course.title };
+        });
+      })
+      .reduce((accumulator, currentGoalArray) => {
+        return [...accumulator, ...currentGoalArray];
       });
-    })
-    .reduce((accumulator, currentGoalArray) => {
-      return [...accumulator, ...currentGoalArray];
-    });
-  console.log("goals", goals);
+  }
   return (
     <IonPage>
       <IonHeader>
