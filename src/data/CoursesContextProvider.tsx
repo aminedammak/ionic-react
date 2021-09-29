@@ -50,7 +50,28 @@ const CoursesContextProvider: React.FC = (props) => {
       return updatedCourses;
     });
   };
-  const updateGoal = (courseId: string, goalId: string, newText: string) => {};
+  const updateGoal = (courseId: string, goalId: string, newText: string) => {
+    setCourses((courses) => {
+      let updatedCourses = [...courses];
+      const updateCourseIndex = courses.findIndex(
+        (course) => course.id === courseId
+      );
+      const updatedCourseGoals =
+        updatedCourses[updateCourseIndex].goals.slice();
+
+      const updateGoalIndex = updatedCourseGoals.findIndex(
+        (goal) => goal.id === goalId
+      );
+
+      let goalToUpdate = updatedCourseGoals[updateGoalIndex];
+
+      goalToUpdate = { ...goalToUpdate, text: newText };
+
+      updatedCourses[updateCourseIndex].goals[updateGoalIndex] = goalToUpdate;
+
+      return updatedCourses;
+    });
+  };
   return (
     <CoursesContext.Provider
       value={{ courses, addCourse, addGoal, deleteGoal, updateGoal }}

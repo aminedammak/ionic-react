@@ -70,9 +70,13 @@ const CourseGoals: React.FC = () => {
     setSelectedGoal(null);
   };
 
-  const addGoalHandler = (text: string) => {
-    coursesCtx.addGoal(text, selectedCourse!.id);
-    setIsEditing(true);
+  const saveGoalHandler = (text: string) => {
+    if (selectedGoal) {
+      coursesCtx.updateGoal(selectedCourse!.id, selectedGoal.id, text);
+    } else {
+      coursesCtx.addGoal(text, selectedCourse!.id);
+    }
+    setIsEditing(false);
   };
 
   return (
@@ -81,7 +85,7 @@ const CourseGoals: React.FC = () => {
         show={isEditing}
         onCancel={cancelEditGoalHandler}
         editedGoal={selectedGoal}
-        onSave={addGoalHandler}
+        onSave={saveGoalHandler}
       />
       <IonToast
         isOpen={!!toastMessage}
