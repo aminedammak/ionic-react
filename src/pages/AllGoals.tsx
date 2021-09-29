@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   IonHeader,
   IonToolbar,
@@ -12,16 +12,19 @@ import {
   IonLabel,
 } from "@ionic/react";
 
-import { COURSE_DATA } from "./Courses";
+import CoursesContext from "../data/courses-context";
 
 const AllGoals: React.FC = () => {
-  const goals = COURSE_DATA.map((course) => {
-    return course.goals.map((goal) => {
-      return { ...goal, courseTitle: course.title };
+  const coursesCtx = useContext(CoursesContext);
+  const goals = coursesCtx.courses
+    .map((course) => {
+      return course.goals.map((goal) => {
+        return { ...goal, courseTitle: course.title };
+      });
+    })
+    .reduce((accumulator, currentGoalArray) => {
+      return [...accumulator, ...currentGoalArray];
     });
-  }).reduce((accumulator, currentGoalArray) => {
-    return [...accumulator, ...currentGoalArray];
-  });
   console.log("goals", goals);
   return (
     <IonPage>

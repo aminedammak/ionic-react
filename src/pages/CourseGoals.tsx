@@ -44,6 +44,7 @@ const CourseGoals: React.FC = () => {
   const goalToDeleteRef = useRef<string | null>(null);
 
   const startDeleteGoalHandler = (goalId: string) => {
+    setToastMessage("");
     goalToDeleteRef.current = goalId;
     setStartedDeleting(true);
   };
@@ -91,9 +92,6 @@ const CourseGoals: React.FC = () => {
         isOpen={!!toastMessage}
         message={toastMessage}
         duration={2000}
-        onDidDismiss={() => {
-          setToastMessage("Goal deleted!");
-        }}
       ></IonToast>
       <IonAlert
         isOpen={startedDeleting}
